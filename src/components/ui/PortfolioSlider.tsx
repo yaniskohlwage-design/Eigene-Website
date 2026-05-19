@@ -62,38 +62,36 @@ export default function PortfolioSlider() {
             {/* Mockup Row */}
             <div className="flex justify-center mb-10">
               {/* MacBook Mockup */}
-              <div className="w-full max-w-3xl">
-                <svg viewBox="0 0 800 500" className="w-full" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <div className="w-full max-w-3xl relative" style={{ aspectRatio: "800 / 500" }}>
+                {/* Video positioned over the screen area (x:72/800=9%, y:32/500=6.4%, w:656/800=82%, h:396/500=79.2%) */}
+                <div
+                  className="absolute overflow-hidden rounded-sm"
+                  style={{ left: "9%", top: "6.4%", width: "82%", height: "79.2%" }}
+                >
+                  <video
+                    key={project.id}
+                    autoPlay
+                    muted
+                    loop
+                    playsInline
+                    style={{ display: "block", width: "100%", height: "100%", objectFit: "cover" }}
+                  >
+                    <source src={project.desktopVideo} type="video/mp4" />
+                  </video>
+                </div>
+                <svg viewBox="0 0 800 500" className="absolute inset-0 w-full h-full" fill="none" xmlns="http://www.w3.org/2000/svg">
                   {/* Screen bezel */}
                   <rect x="60" y="20" width="680" height="420" rx="12" fill="#1a1a1a" />
-                  {/* Screen inner */}
-                  <rect x="72" y="32" width="656" height="396" rx="4" fill="#000" />
+                  {/* Screen inner (transparent so video shows through) */}
+                  <rect x="72" y="32" width="656" height="396" rx="4" fill="transparent" />
                   {/* Camera dot */}
                   <circle cx="400" cy="26" r="3" fill="#333" />
                   {/* Base */}
                   <path d="M 0 448 Q 0 440 60 440 L 740 440 Q 800 440 800 448 L 800 460 Q 800 468 400 468 Q 0 468 0 460 Z" fill="#2a2a2a" />
                   {/* Hinge line */}
                   <line x1="0" y1="448" x2="800" y2="448" stroke="#111" strokeWidth="2" />
-                  {/* Video inside screen — crop 12px top+bottom to hide recording artifacts */}
-                  <foreignObject x="72" y="32" width="656" height="396">
-                    <div style={{ width: "100%", height: "100%", overflow: "hidden" }}>
-                      <video
-                        autoPlay
-                        muted
-                        loop
-                        playsInline
-                        style={{
-                          display: "block",
-                          width: "100%",
-                          height: "calc(100% + 4px)",
-                          marginTop: "-2px",
-                          objectFit: "cover",
-                        }}
-                      >
-                        <source src={project.desktopVideo} type="video/mp4" />
-                      </video>
-                    </div>
-                  </foreignObject>
+                  {/* Bezel overlay on top to clip edges */}
+                  <rect x="60" y="20" width="680" height="420" rx="12" fill="none" stroke="#1a1a1a" strokeWidth="24" />
                 </svg>
               </div>
             </div>
