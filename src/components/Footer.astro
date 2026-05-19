@@ -1,0 +1,25 @@
+---
+const year = new Date().getFullYear()
+---
+
+<footer class="bg-black border-t border-white/10 py-12">
+  <div class="max-w-6xl mx-auto px-6">
+    <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+      <div class="flex flex-col items-center md:items-start gap-2">
+        <span class="text-white font-bold text-lg tracking-tight">Fate Design</span>
+        <span class="text-white/40 text-sm">Yanis Kohlwage · Hamburg</span>
+        <span class="text-white/30 text-xs">Kleinunternehmer gem. § 19 UStG</span>
+      </div>
+
+      <nav class="flex items-center gap-6 text-sm text-white/50">
+        <a href="/impressum" class="hover:text-white/80 transition-colors">Impressum</a>
+        <a href="/datenschutz" class="hover:text-white/80 transition-colors">Datenschutz</a>
+        <a href="mailto:kontakt@fatedesign.studio" class="hover:text-white/80 transition-colors">kontakt@fatedesign.studio</a>
+      </nav>
+    </div>
+
+    <div class="mt-8 pt-6 border-t border-white/5 text-center">
+      <p class="text-white/25 text-xs">© {year} Fate Design – Yanis Kohlwage. Alle Rechte vorbehalten.</p>
+    </div>
+  </div>
+</footer>

@@ -1,0 +1,48 @@
+---
+interface Props {
+  title: string
+  description?: string
+  ogImage?: string
+  canonical?: string
+}
+
+const {
+  title,
+  description = "Fate Design — Professionelle Websites für lokale Unternehmen in Hamburg. Festpreis 499 €, in 3 Wochen online.",
+  ogImage = "/og-image.jpg",
+  canonical,
+} = Astro.props
+
+const canonicalURL = canonical ?? new URL(Astro.url.pathname, Astro.site ?? "https://fatedesign.studio").href
+---
+
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/svg+xml" href="/logo.svg" />
+
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalURL} />
+
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="de_DE" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>
+
+<style is:global>
+  @import "../styles/global.css";
+</style>

@@ -1,0 +1,68 @@
+---
+---
+
+<section id="ueber-mich" class="py-24 bg-white">
+  <div class="max-w-6xl mx-auto px-6">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+      <!-- Image -->
+      <div class="about-image flex justify-center lg:justify-start">
+        <div class="relative">
+          <div class="w-72 h-72 md:w-80 md:h-80 rounded-2xl overflow-hidden bg-gray-100 shadow-lg">
+            <img
+              src="/images/yanis.jpg"
+              alt="Yanis Kohlwage — Fate Design"
+              class="w-full h-full object-cover"
+              loading="lazy"
+            />
+          </div>
+          <!-- Decorative element -->
+          <div class="absolute -bottom-4 -right-4 w-24 h-24 bg-black rounded-2xl flex items-center justify-center shadow-lg">
+            <span class="text-white text-xs font-bold text-center leading-tight px-2">Fate<br/>Design</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Text -->
+      <div class="about-text">
+        <h2 class="text-3xl sm:text-4xl font-bold text-gray-900 mb-6">Hallo, ich bin Yanis.</h2>
+        <p class="text-gray-600 leading-relaxed mb-4">
+          Ich bin Yanis Kohlwage, Webdesigner aus Hamburg und studiere Computer Games Technology —
+          das bedeutet: ich schreibe echten Code, kein Baukastensystem.
+        </p>
+        <p class="text-gray-600 leading-relaxed mb-4">
+          Fate Design ist mein Weg, lokalen Businesses eine professionelle Online-Präsenz zu ermöglichen,
+          die sie sich bisher nicht leisten konnten oder wollten.
+        </p>
+        <p class="text-gray-600 leading-relaxed mb-8">
+          Ich bin in Hamburg zu Hause und kenne den Markt hier. Kurze Wege, direkte Kommunikation —
+          du hast immer einen echten Ansprechpartner.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  const elements = document.querySelectorAll(".about-image, .about-text")
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry, i) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => {
+            ;(entry.target as HTMLElement).style.opacity = "1"
+            ;(entry.target as HTMLElement).style.transform = "translateY(0)"
+          }, i * 150)
+          observer.unobserve(entry.target)
+        }
+      })
+    },
+    { threshold: 0.15 }
+  )
+
+  elements.forEach((el) => {
+    ;(el as HTMLElement).style.opacity = "0"
+    ;(el as HTMLElement).style.transform = "translateY(24px)"
+    ;(el as HTMLElement).style.transition = "opacity 0.7s ease, transform 0.7s ease"
+    observer.observe(el)
+  })
+</script>

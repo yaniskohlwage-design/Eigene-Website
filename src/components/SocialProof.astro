@@ -1,0 +1,58 @@
+---
+const items = [
+  {
+    icon: "💻",
+    title: "Echter Code, kein Baukasten",
+    text: "Deine Website wird von Grund auf programmiert — kein Wix, kein WordPress, kein Template. Das bedeutet: schneller, sicherer und vollständig individuell.",
+  },
+  {
+    icon: "🎓",
+    title: "Computer Games Technology",
+    text: "Ich studiere Computer Games Technology in Hamburg und bringe das technische Know-how mit, das über Standard-Webdesign weit hinausgeht.",
+  },
+  {
+    icon: "📍",
+    title: "100 % Hamburg-Fokus",
+    text: "Ich arbeite ausschließlich mit lokalen Unternehmen in Hamburg zusammen — kurze Wege, direkter Kontakt, kein anonymes Ticket-System.",
+  },
+]
+---
+
+<section id="social-proof" class="py-20 bg-black">
+  <div class="max-w-6xl mx-auto px-6">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      {items.map((item) => (
+        <div class="proof-card rounded-2xl border border-white/10 bg-white/5 backdrop-blur-sm p-8 hover:bg-white/8 transition-colors">
+          <div class="text-3xl mb-4">{item.icon}</div>
+          <h3 class="text-white font-semibold text-lg mb-3">{item.title}</h3>
+          <p class="text-white/60 text-sm leading-relaxed">{item.text}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<script>
+  const cards = document.querySelectorAll(".proof-card")
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry, i) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => {
+            (entry.target as HTMLElement).style.opacity = "1"
+            ;(entry.target as HTMLElement).style.transform = "translateY(0)"
+          }, i * 100)
+          observer.unobserve(entry.target)
+        }
+      })
+    },
+    { threshold: 0.15 }
+  )
+
+  cards.forEach((card) => {
+    ;(card as HTMLElement).style.opacity = "0"
+    ;(card as HTMLElement).style.transform = "translateY(24px)"
+    ;(card as HTMLElement).style.transition = "opacity 0.6s ease, transform 0.6s ease"
+    observer.observe(card)
+  })
+</script>

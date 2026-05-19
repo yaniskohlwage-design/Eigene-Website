@@ -1,0 +1,73 @@
+---
+const steps = [
+  {
+    number: "01",
+    title: "Gespräch & Briefing",
+    text: "Wir reden kurz über dein Business, deine Ziele und was die Website leisten soll. Kein Fachjargon, kein Stress.",
+  },
+  {
+    number: "02",
+    title: "Design & Umsetzung",
+    text: "Ich entwerfe und baue deine Website. Du siehst Zwischenstände und kannst jederzeit Feedback geben.",
+  },
+  {
+    number: "03",
+    title: "Freigabe & Live",
+    text: "Du gibst das OK — und deine Website geht online. Fertig in maximal 3 Wochen.",
+  },
+  {
+    number: "04",
+    title: "Betreuung läuft",
+    text: "Mit dem Hosting-Abo kümmerst du dich um gar nichts mehr. Ich halte alles am Laufen.",
+  },
+]
+---
+
+<section id="ablauf" class="py-24 bg-white">
+  <div class="max-w-6xl mx-auto px-6">
+    <div class="text-center mb-16 step-animate">
+      <h2 class="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">So läuft's ab</h2>
+      <p class="text-gray-500 max-w-xl mx-auto">Vier Schritte. Kein Technikstress. Einfach eine Website bekommen.</p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-8 relative">
+      <!-- Connection line (desktop only) -->
+      <div class="hidden md:block absolute top-8 left-[12.5%] right-[12.5%] h-px bg-gray-200 z-0"></div>
+
+      {steps.map((step) => (
+        <div class="step-card relative z-10 flex flex-col items-center text-center">
+          <div class="w-16 h-16 bg-black text-white rounded-full flex items-center justify-center text-sm font-bold mb-6 shadow-lg">
+            {step.number}
+          </div>
+          <h3 class="text-lg font-semibold text-gray-900 mb-3">{step.title}</h3>
+          <p class="text-gray-500 text-sm leading-relaxed">{step.text}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<script>
+  const cards = document.querySelectorAll(".step-card, .step-animate")
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry, i) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => {
+            ;(entry.target as HTMLElement).style.opacity = "1"
+            ;(entry.target as HTMLElement).style.transform = "translateY(0)"
+          }, i * 120)
+          observer.unobserve(entry.target)
+        }
+      })
+    },
+    { threshold: 0.1 }
+  )
+
+  cards.forEach((card) => {
+    ;(card as HTMLElement).style.opacity = "0"
+    ;(card as HTMLElement).style.transform = "translateY(24px)"
+    ;(card as HTMLElement).style.transition = "opacity 0.6s ease, transform 0.6s ease"
+    observer.observe(card)
+  })
+</script>
