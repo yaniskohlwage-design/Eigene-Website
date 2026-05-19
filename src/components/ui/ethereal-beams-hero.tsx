@@ -467,7 +467,7 @@ export default function EtherealBeamsHero() {
       </div>
 
       {/* Glassmorphic Navbar */}
-      <nav className="relative z-20 w-full">
+      <nav className="relative z-20 w-full" style={{ paddingTop: "env(safe-area-inset-top)" }}>
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="flex h-16 items-center justify-between">
             <div className="flex items-center">
