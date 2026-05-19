@@ -1,5 +1,4 @@
 ---
-const success = Astro.url.searchParams.get("success") === "true"
 ---
 
 <section id="kontakt" class="py-24 bg-black">
@@ -64,12 +63,10 @@ const success = Astro.url.searchParams.get("success") === "true"
 
       <!-- Right: Form -->
       <div class="contact-form">
-        {success && (
-          <div class="mb-6 p-4 bg-white/10 border border-white/20 rounded-xl">
-            <p class="text-white font-medium">Danke für deine Nachricht!</p>
-            <p class="text-white/60 text-sm mt-1">Ich melde mich innerhalb von 24 Stunden bei dir.</p>
-          </div>
-        )}
+        <div id="success-banner" class="hidden mb-6 p-4 bg-white/10 border border-white/20 rounded-xl">
+          <p class="text-white font-medium">Danke für deine Nachricht!</p>
+          <p class="text-white/60 text-sm mt-1">Ich melde mich innerhalb von 24 Stunden bei dir.</p>
+        </div>
 
         <form
           name="kontakt"
@@ -136,6 +133,10 @@ const success = Astro.url.searchParams.get("success") === "true"
 </section>
 
 <script>
+  if (new URLSearchParams(window.location.search).get("success") === "true") {
+    document.getElementById("success-banner")?.classList.remove("hidden")
+  }
+
   const elements = document.querySelectorAll(".contact-info, .contact-form")
   const observer = new IntersectionObserver(
     (entries) => {
