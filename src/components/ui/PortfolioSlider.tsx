@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useState, useRef, useEffect } from "react"
 import { AnimatePresence, motion } from "motion/react"
 import { ChevronLeft, ChevronRight, ExternalLink } from "lucide-react"
 
@@ -9,6 +9,7 @@ interface Project {
   description: string
   liveUrl: string
   desktopVideo: string
+  videoScale?: number
 }
 
 const projects: Project[] = [
@@ -20,6 +21,7 @@ const projects: Project[] = [
       "Professioneller Webauftritt für ein Hamburger Handwerksunternehmen. Klare Leistungsübersicht, Referenzen und ein unkompliziertes Kontaktformular für Angebotsanfragen.",
     liveUrl: "https://steinbach-bau.netlify.app",
     desktopVideo: "/videos/steinbach-bau.mp4",
+    videoScale: 1.08,
   },
   {
     id: "kontur-kaffee",
@@ -35,6 +37,7 @@ const projects: Project[] = [
 export default function PortfolioSlider() {
   const [current, setCurrent] = useState(0)
   const [direction, setDirection] = useState(1)
+  const videoRef = useRef<HTMLVideoElement>(null)
 
   const goTo = (index: number) => {
     setDirection(index > current ? 1 : -1)
@@ -45,6 +48,12 @@ export default function PortfolioSlider() {
   const next = () => goTo((current + 1) % projects.length)
 
   const project = projects[current]
+
+  useEffect(() => {
+    const video = videoRef.current
+    if (!video) return
+    video.play().catch(() => {})
+  }, [current])
 
   return (
     <div className="w-full">
@@ -69,31 +78,32 @@ export default function PortfolioSlider() {
                   style={{ left: "9%", top: "6.4%", width: "82%", height: "79.2%" }}
                 >
                   <video
-                    key={project.id}
+                    ref={videoRef}
                     autoPlay
                     muted
                     loop
                     playsInline
-                    style={{ display: "block", width: "100%", height: "100%", objectFit: "cover" }}
+                    style={{
+                      display: "block",
+                      width: "100%",
+                      height: "100%",
+                      objectFit: "cover",
+                      transform: project.videoScale ? `scale(${project.videoScale})` : undefined,
+                    }}
                   >
                     <source src={project.desktopVideo} type="video/mp4" />
                   </video>
                 </div>
                 <svg viewBox="0 0 800 500" className="absolute inset-0 w-full h-full" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <defs>
-                    {/* Mask cuts a hole where the screen is so video shows through */}
                     <mask id="bezel-mask">
                       <rect x="60" y="20" width="680" height="420" rx="12" fill="white" />
                       <rect x="72" y="32" width="656" height="396" rx="4" fill="black" />
                     </mask>
                   </defs>
-                  {/* Bezel frame with hole for screen */}
                   <rect x="60" y="20" width="680" height="420" rx="12" fill="#1a1a1a" mask="url(#bezel-mask)" />
-                  {/* Camera dot */}
                   <circle cx="400" cy="26" r="3" fill="#333" />
-                  {/* Base */}
                   <path d="M 0 448 Q 0 440 60 440 L 740 440 Q 800 440 800 448 L 800 460 Q 800 468 400 468 Q 0 468 0 460 Z" fill="#2a2a2a" />
-                  {/* Hinge line */}
                   <line x1="0" y1="448" x2="800" y2="448" stroke="#111" strokeWidth="2" />
                 </svg>
               </div>
