@@ -1,0 +1,26 @@
+---
+import Base from "../layouts/Base.astro"
+import Footer from "../components/Footer.astro"
+---
+
+<Base
+  title="Danke! — Fate Design"
+  description="Deine Nachricht wurde erfolgreich gesendet."
+>
+  <div class="min-h-screen bg-black flex flex-col items-center justify-center px-6 text-center">
+    <div class="mb-6 w-16 h-16 bg-white/10 rounded-full flex items-center justify-center">
+      <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="20 6 9 17 4 12"/>
+      </svg>
+    </div>
+    <h1 class="text-3xl font-bold text-white mb-4">Danke für deine Nachricht!</h1>
+    <p class="text-white/60 max-w-md mb-8">Ich melde mich innerhalb von 24 Stunden bei dir.</p>
+    <a
+      href="/"
+      class="inline-flex items-center gap-2 bg-white text-black font-semibold px-6 py-3 rounded-full hover:bg-gray-100 transition-colors"
+    >
+      Zurück zur Startseite
+    </a>
+  </div>
+  <Footer />
+</Base>
