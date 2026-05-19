@@ -21,7 +21,7 @@ const projects: Project[] = [
       "Professioneller Webauftritt für ein Hamburger Handwerksunternehmen. Klare Leistungsübersicht, Referenzen und ein unkompliziertes Kontaktformular für Angebotsanfragen.",
     liveUrl: "https://steinbach-bau.netlify.app",
     desktopVideo: "/videos/steinbach-bau.mp4",
-    videoScale: 1.08,
+    videoScale: 1.03,
   },
   {
     id: "kontur-kaffee",
@@ -83,6 +83,7 @@ export default function PortfolioSlider() {
                     muted
                     loop
                     playsInline
+                    onCanPlay={(e) => { (e.currentTarget as HTMLVideoElement).play().catch(() => {}) }}
                     style={{
                       display: "block",
                       width: "100%",
