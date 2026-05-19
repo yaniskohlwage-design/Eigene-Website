@@ -80,18 +80,21 @@ export default function PortfolioSlider() {
                   </video>
                 </div>
                 <svg viewBox="0 0 800 500" className="absolute inset-0 w-full h-full" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  {/* Screen bezel */}
-                  <rect x="60" y="20" width="680" height="420" rx="12" fill="#1a1a1a" />
-                  {/* Screen inner (transparent so video shows through) */}
-                  <rect x="72" y="32" width="656" height="396" rx="4" fill="transparent" />
+                  <defs>
+                    {/* Mask cuts a hole where the screen is so video shows through */}
+                    <mask id="bezel-mask">
+                      <rect x="60" y="20" width="680" height="420" rx="12" fill="white" />
+                      <rect x="72" y="32" width="656" height="396" rx="4" fill="black" />
+                    </mask>
+                  </defs>
+                  {/* Bezel frame with hole for screen */}
+                  <rect x="60" y="20" width="680" height="420" rx="12" fill="#1a1a1a" mask="url(#bezel-mask)" />
                   {/* Camera dot */}
                   <circle cx="400" cy="26" r="3" fill="#333" />
                   {/* Base */}
                   <path d="M 0 448 Q 0 440 60 440 L 740 440 Q 800 440 800 448 L 800 460 Q 800 468 400 468 Q 0 468 0 460 Z" fill="#2a2a2a" />
                   {/* Hinge line */}
                   <line x1="0" y1="448" x2="800" y2="448" stroke="#111" strokeWidth="2" />
-                  {/* Bezel overlay on top to clip edges */}
-                  <rect x="60" y="20" width="680" height="420" rx="12" fill="none" stroke="#1a1a1a" strokeWidth="24" />
                 </svg>
               </div>
             </div>
